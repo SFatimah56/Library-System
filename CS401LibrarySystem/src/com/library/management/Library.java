@@ -3,13 +3,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 
-
 public class Library {
     private List<Book> books = new ArrayList<>();
     private List<Patron> patrons = new ArrayList<>();
     private List<Transaction> transactions = new ArrayList<>();
 
-    // Method to add a book
+    //Method to add a book
     public void addBook(Book book) {
         books.add(book);
     }
