@@ -9,7 +9,7 @@ public class Transaction {
     private final Date checkoutDate;
     private Date returnDate;
 
-    //overloaded Constructor
+    //Constructor
     public Transaction(Patron patron, Book book, Date checkoutDate) {
         if (patron == null || book == null || checkoutDate == null) {
             throw new IllegalArgumentException("Patron, book, and checkout date cannot be null");

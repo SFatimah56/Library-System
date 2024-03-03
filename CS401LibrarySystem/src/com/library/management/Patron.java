@@ -9,7 +9,6 @@ public class Patron {
     private String contactInfo;
     private List<Transaction> borrowingHistory;
     
-    //constructors
     //constructor for existing patron
     public Patron(int ID, String name, String contactInfo, List<Transaction> borrowingHistory) {
         this.ID = ID;

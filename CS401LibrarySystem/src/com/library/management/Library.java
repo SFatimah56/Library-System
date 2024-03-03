@@ -8,7 +8,7 @@ public class Library {
     private List<Patron> patrons = new ArrayList<>();
     private List<Transaction> transactions = new ArrayList<>();
 
-    //Method to add a book
+    // Method to add a book
     public void addBook(Book book) {
         books.add(book);
     }
