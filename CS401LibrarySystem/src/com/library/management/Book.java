@@ -4,18 +4,20 @@ import java.util.List;
 
 public class Book {
 	private String ISBN;
-	private String genre;
 	private boolean available;
 	private String title;
+	private String genre;
+	private String author;
 	private List<Author> authors;
 
 	public Book() {}
 
-	public Book(String iSBN, String genre, boolean available, String title) {
+	public Book(String iSBN, String author, boolean available, String title, String genre) {
 		ISBN = iSBN;
-		this.genre = genre;
+		this.author = author;
 		this.available = available;
 		this.title = title;
+		this.genre = genre;
 	}
 
 	public String getISBN() {
@@ -26,12 +28,12 @@ public class Book {
 		ISBN = iSBN;
 	}
 
-	public String getGenre() {
-		return genre;
+	public String getAuthor() {
+		return author;
 	}
 
-	public void setGenre(String genre) {
-		this.genre = genre;
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 
 	
@@ -50,6 +52,13 @@ public class Book {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
 
 	public List<Author> getAuthors() {
 		return authors;
@@ -67,10 +76,16 @@ public class Book {
 	}
 	
 	//FictionBook inherits from Book
-	public class FictionBook extends Book{
+	public static class FictionBook extends Book{
 		private String theme;
+		private String audience;
 		private List<String> characters;
 		
+	    public FictionBook(String ISBN, String author, boolean available, String title, String genre, String theme, String audience) {
+	        super(ISBN, author, available, title, genre);
+	        this.theme = theme;
+	        this.audience = audience;
+	    }
 		public FictionBook(String theme, List<String> characters) {
 			super();
 			this.theme = theme;
@@ -84,6 +99,12 @@ public class Book {
 		public void setTheme(String theme) {
 			this.theme = theme;
 		}
+		public String getAudience() {
+			return audience;
+		}
+		public void setAudience(String audience) {
+			this.audience = audience;
+		}
 
 		public List<String> getCharacters() {
 			return characters;
@@ -96,16 +117,21 @@ public class Book {
 	}
 	
 	// NonfictionBook inherits from Book
-	public class NonfictionBook extends Book{
-		private String theme;
+	public static class NonfictionBook extends Book{
+		private String subjectArea;
 		private String audience;
 		
-		
-		public String getTheme() {
-			return theme;
+	    public NonfictionBook(String ISBN, String author, boolean available, String title, String genre, String subjectArea, String audience) {
+	        super(ISBN, author, available, title, genre);
+	        this.subjectArea = subjectArea;
+	        this.audience = audience;
+	    }
+		public String getSubjectArea() {
+			return subjectArea;
 		}
-		public void setTheme(String theme) {
-			this.theme = theme;
+
+		public void setSubjectArea(String subjectArea) {
+			this.subjectArea = subjectArea;
 		}
 		public String getAudience() {
 			return audience;
