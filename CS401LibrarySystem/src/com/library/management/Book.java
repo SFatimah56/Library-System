@@ -20,6 +20,14 @@ public class Book {
 		this.genre = genre;
 	}
 
+    public String getDetails() {
+        return "\nTitle: " + getTitle() +
+               ", Author: " + getAuthor() +
+               ", ISBN: " + getISBN() +
+               ", Genre: " + getGenre() +
+               ", Available: " + (isAvailable() ? "Yes" : "No");
+    }
+    
 	public String getISBN() {
 		return ISBN;
 	}
@@ -52,6 +60,7 @@ public class Book {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	
 	public String getGenre() {
 		return genre;
 	}
@@ -91,6 +100,11 @@ public class Book {
 			this.theme = theme;
 			this.characters = characters;
 		}
+		
+	    @Override
+	    public String getDetails() {
+	        return super.getDetails() + ", Type: Fiction" + ", Theme: " + theme +", Audience: " + audience;             
+	    }
 
 		public String getTheme() {
 			return theme;
@@ -125,6 +139,11 @@ public class Book {
 	        super(ISBN, author, available, title, genre);
 	        this.subjectArea = subjectArea;
 	        this.audience = audience;
+	    }
+	    
+	    @Override
+	    public String getDetails() {
+	        return super.getDetails() + ", Type: Non-Fiction" + ", Subject Area: " + subjectArea + ", Audience: " + audience;
 	    }
 		public String getSubjectArea() {
 			return subjectArea;

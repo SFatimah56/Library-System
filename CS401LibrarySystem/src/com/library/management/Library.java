@@ -20,7 +20,6 @@ public class Library {
 
         // If no book with the same ISBN exists, add the new book to the library
         books.add(book);
-        System.out.println("Book added successfully: " + book.getTitle());
     }
 
     // Method to remove a book
@@ -108,26 +107,8 @@ public class Library {
             System.out.println("No books in the library.");
             return;
         }
-
         for (Book book : books) {
-            System.out.println("\nTitle: " + book.getTitle() + ", Author: " + book.getAuthor() + ", ISBN: " + book.getISBN() + ", Genre: " + book.getGenre() + ", Available: " + (book.isAvailable() ? "Yes" : "No"));
-            
-            // Check for FictionBook and print additional info
-            if (book instanceof Book.FictionBook) {
-                Book.FictionBook fictionBook = (Book.FictionBook) book;
-                System.out.println("Type: Fiction");
-                System.out.println("Theme: " + fictionBook.getTheme());
-                System.out.println("Audience: " + fictionBook.getAudience());
-            } 
-            else if (book instanceof Book.NonfictionBook) {
-                Book.NonfictionBook nonfictionBook = (Book.NonfictionBook) book;
-                System.out.println("Type: Non-Fiction");
-                System.out.println("Subject Area: " + nonfictionBook.getSubjectArea());
-                System.out.println("Audience: " + nonfictionBook.getAudience());
-            } 
-            else {
-                System.out.println("Type: General Book");
-            }
+            System.out.println(book.getDetails()); // Uses polymorphism to get the correct details
         }
     }
     
