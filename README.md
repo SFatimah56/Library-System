@@ -9,8 +9,8 @@ The Library System is a console-based program that replicates a standard public 
 2. Compile and run the program
 3. Choose a menu option between 1 and 8
 4. Follow the instructions prompted by the selected option
-5. To continue: select a new operation between 1 and 7
-6. To exit: select option 8
+5. To continue: select a new operation between 1 and 8
+6. To exit, select option 9
 
 ## Credits
 Sharan Robinson
