@@ -9,7 +9,120 @@ public class LibraryUI {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        boolean running = true;
+        while(true) {
+            System.out.println("\nEnter 1 for Library management and 2 for social network and 3 to quit the program:");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline character
+            
+            if(choice == 1) {
+            	libraryManagement();
+            }
+            else if (choice == 2){
+            	socialNetwork();
+            }
+            else if (choice == 3) {
+            	break;
+            }
+        }
+        
+       System.out.print("Program Ending...");
+        
+    }
+    
+    private static void socialNetwork() {
+        	boolean running = true;
+            while (running) {
+            	socialNetworkMenu();
+                int choice = scanner.nextInt();
+                scanner.nextLine(); // Consume the newline character
+
+                switch (choice) {
+                case 1:
+                    addUser();
+                    break;
+                case 2:
+                    addGroup();
+                    break;
+                case 3:
+                    addDisscussion();
+                    break;
+                case 4:
+                    addEvents();
+                    break;
+                case 5:
+                	printAllUsers();
+                    break;
+                case 6:
+                	printAllGroups();
+                    break;
+                case 7:
+                	printAllDiscussions();
+                    break;
+                case 8:    
+                	printAllEvents();
+                    break;
+                case 9:    
+                	loginAsUser();
+                    break;
+                case 10:
+                    running = false;
+                    System.out.println("Exiting the system. Goodbye!");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+                }
+            }
+        }
+        
+    
+    
+    private static void loginAsUser() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void printAllEvents() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void printAllDiscussions() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void printAllGroups() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void printAllUsers() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void addEvents() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void addDisscussion() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void addGroup() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void addUser() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void libraryManagement() {
+    	boolean running = true;
         while (running) {
             displayMenu();
             int choice = scanner.nextInt();
@@ -49,6 +162,25 @@ public class LibraryUI {
             }
         }
     }
+    
+    
+    
+    
+    private static void socialNetworkMenu(){
+        System.out.println("\nSocial Network System");
+        System.out.println("1. Add User");
+        System.out.println("2. Add Group");
+        System.out.println("3. Add Discussion");
+        System.out.println("4. Add Events");
+        System.out.println("5. Print All User");
+        System.out.println("6. Print All Groups");
+        System.out.println("7. Print All Discussions");
+        System.out.println("8. Print All Events");
+        System.out.println("9. Login As User");
+        System.out.println("10. Quit");
+        System.out.print("Enter your choice (1-10): ");
+    }
+   
 
     private static void displayMenu() {
         System.out.println("\nLibrary Management System");
