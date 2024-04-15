@@ -21,7 +21,7 @@ public class Sqldriver
         try
         (
           // create a database connection
-          Connection connection = DriverManager.getConnection("jdbc:sqlite:sample.db");
+          Connection connection = DriverManager.getConnection("jdbc:sqlite:database.db");
           Statement statement = connection.createStatement();
         )
         {
@@ -61,7 +61,7 @@ public class Sqldriver
         try
         (
           // create a database connection
-          Connection connection = DriverManager.getConnection("jdbc:sqlite:sample.db");
+          Connection connection = DriverManager.getConnection("jdbc:sqlite:database.db");
           Statement statement = connection.createStatement();
         )
         {
@@ -91,6 +91,8 @@ public class Sqldriver
         
         return events;
       }
+      
+
       
       
     }
