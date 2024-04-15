@@ -139,7 +139,7 @@ public class LibraryUI {
 	        	System.out.println("Event type cannot be empty. Please enter a valid type.");
 		    }
 	    }
-	    EventsManager.createEvent(title, description, eventDate, eventType);
+	    new EventsManager.Event(title, description, eventDate, eventType);
 	}
 
 	private static void addDisscussion() {
