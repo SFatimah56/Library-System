@@ -3,10 +3,10 @@ package com.library.management;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+
 
 public class EventsManager {
-    private static List<Event> events = new ArrayList<>();  // Static list to hold all events
+    private static ArrayList<Event> events = new ArrayList<>();  // Static list to hold all events
 
     // Static nested class Event
     public static class Event {
