@@ -15,21 +15,71 @@ import java.util.Scanner;
 import java.sql.Date;
 
 import com.library.management.EventsManager.Event;
+import com.library.management.GroupManager.Group;
 import com.library.management.UserManager.User;
 public class SocialNetwork {
 	EventsManager eventmanager;
 	UserManager usermanager;
+	GroupManager groupmanager;
 	Scanner scanner;
 	
 	
 	public SocialNetwork(){
 		this.eventmanager = new EventsManager();
 		this.usermanager = new UserManager();
+		this.groupmanager = new GroupManager();
 		getEvents();
 		getUsers();
+		getGroups();
 	    scanner = new Scanner(System.in);
 
 	}
+	
+	
+	private void getGroups() {
+	      // NOTE: Connection and Statement are AutoClosable.
+	      //       Don't forget to close them both in order to avoid leaks.
+	      try
+	      (
+	        // create a database connection
+	        Connection connection = DriverManager.getConnection("jdbc:sqlite:database.db");
+	        Statement statement = connection.createStatement();
+	      )
+	      {
+	        statement.setQueryTimeout(30);  // set timeout to 30 sec.
+
+	        ResultSet resultSet = statement.executeQuery("select * from Groups");
+	        while(resultSet.next())
+	        {
+	          // read the result set
+	        
+	        String name = resultSet.getString("name");
+	        boolean dup = false;
+	        
+	        for(Group i : groupmanager.getAllGroups()) {
+	        	if(i.getName() == name) {
+	        		dup = true;
+	        	}
+	        }
+	        	
+	        if(!dup) {
+	        groupmanager.createGroup(
+	      			name,
+	                new ArrayList<String>(Arrays.asList(resultSet.getString("discussionIDs").split(","))),
+	                new ArrayList<String>(Arrays.asList(resultSet.getString("members").split(",")))
+	        		);
+	        }
+	      	
+	        }
+	      }
+	      catch(SQLException e)
+	      {
+	        // if the error message is "out of memory",
+	        // it probably means no database file is found
+	        e.printStackTrace(System.err);
+	      }
+	}
+
 	
 	
 	public void updateEvents() {
@@ -166,7 +216,63 @@ public class SocialNetwork {
         updateUsers();
 	}
 
-    public void getEvents()
+	public void createGroup() {
+        System.out.print("Enter Group name: ");
+        String name = scanner.nextLine();
+        
+        groupmanager.createGroup(name);
+        
+        updateGroups();
+        
+	}
+	
+    private void updateGroups() {
+		// TODO Auto-generated method stub
+    	ArrayList<Group> groups = groupmanager.getAllGroups();
+
+        try
+        (
+          // create a database connection
+          Connection connection = DriverManager.getConnection("jdbc:sqlite:database.db");
+          Statement statement = connection.createStatement();
+        )
+        {
+        	String setUp = "CREATE TABLE IF NOT EXISTS Groups (\n"
+                    + "  name text PRIMARY KEY,\n"
+                    + "  discussionIDs text,\n"
+                    + "  members text\n"
+                    + ");";
+            
+            statement.execute(setUp);
+            
+            String sql2 = "INSERT INTO Groups(name, discussionIDs, members) VALUES(?, ?, ?) ";
+
+            for(Group i : groups) {
+                PreparedStatement pstmt = connection.prepareStatement(sql2);
+                pstmt.setString(1, i.getName());
+                pstmt.setString(2, 
+                		String.join(",",i.getDiscussions())
+                		);  
+                pstmt.setString(3, 
+                		String.join(",",i.getMembers())
+                		);  
+                
+                pstmt.execute();
+  
+            }
+          
+        }
+        catch(SQLException e)
+        {
+          // if the error message is "out of memory",
+          // it probably means no database file is found
+          e.printStackTrace(System.err);
+        }
+	
+	}
+
+
+	public void getEvents()
     {
   	  
       // NOTE: Connection and Statement are AutoClosable.
@@ -277,6 +383,11 @@ public class SocialNetwork {
 		usermanager.listAllUsers();
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	public void listAllGroups() {
+		groupmanager.listAllGroups();
 	}
 
 

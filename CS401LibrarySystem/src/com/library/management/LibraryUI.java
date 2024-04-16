@@ -94,7 +94,7 @@ public class LibraryUI {
 
 	private static void printAllGroups() {
 		// TODO Auto-generated method stub
-		
+		socialnetwork.listAllGroups();
 	}
 
 	private static void printAllUsers() {
@@ -114,6 +114,7 @@ public class LibraryUI {
 
 	private static void addGroup() {
 		// TODO Auto-generated method stub
+		socialnetwork.createGroup();
 		
 	}
 
