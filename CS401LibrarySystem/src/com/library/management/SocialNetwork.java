@@ -1,4 +1,3 @@
-
 package com.library.management;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,13 +9,8 @@ import java.util.ArrayList;
 import com.library.management.EventsManager.Event;
 public class SocialNetwork {
 	EventsManager eventmanager;
-	
-	
 	public SocialNetwork(){
 		this.eventmanager = new EventsManager();
 
 	}
-	
-	
-
 }
