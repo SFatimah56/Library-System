@@ -8,6 +8,7 @@ import java.util.Date;
 public class LibraryUI {
     private static Library library = new Library();
     private static Scanner scanner = new Scanner(System.in);
+    private static SocialNetwork socialnetwork = new SocialNetwork();
 
     public static void main(String[] args) {
         while(true) {
@@ -102,44 +103,7 @@ public class LibraryUI {
 	}
 
 	private static void addEvents() {
-		String title = "";
-	    while (title.isEmpty()) {
-	        System.out.print("Enter event title: ");
-	        title = scanner.nextLine().trim();
-		    if (title.isEmpty()) {
-		    	System.out.println("Event title cannot be empty. Please enter a valid title.");
-		    }
-	    }
-
-	    String description = "";
-	    while (description.isEmpty()) {
-	        System.out.print("Enter event description: ");
-	        description = scanner.nextLine().trim();
-	        if (description.isEmpty()) {
-	            System.out.println("Event description cannot be empty. Please enter a valid description.");
-	        }
-	    }
-
-	    Date eventDate = null;
-	    while (eventDate == null) {
-	        System.out.print("Enter event date (YYYY-MM-DD): ");
-	        String dateString = scanner.nextLine().trim();
-	        try {
-	            eventDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateString);
-	        } catch (ParseException e) {
-	            System.out.println("Invalid date format. Please use YYYY-MM-DD format.");
-	        }
-	    }
-
-	    String eventType = "";
-	    while (eventType.isEmpty()) {
-	        System.out.print("Enter event type (e.g., Book Club, Author Signing): ");
-	        eventType = scanner.nextLine().trim();
-	        if (eventType.isEmpty()) {
-	        	System.out.println("Event type cannot be empty. Please enter a valid type.");
-		    }
-	    }
-	    new EventsManager.Event(title, description, eventDate, eventType);
+		socialnetwork.createEvent();
 	}
 
 	private static void addDisscussion() {
