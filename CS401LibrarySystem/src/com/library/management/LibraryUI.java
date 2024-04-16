@@ -84,7 +84,7 @@ public class LibraryUI {
 	}
 
 	private static void printAllEvents() {
-		EventsManager.listAllEvents();	
+		socialnetwork.listAllEvents();	
 	}
 
 	private static void printAllDiscussions() {
@@ -98,6 +98,7 @@ public class LibraryUI {
 	}
 
 	private static void printAllUsers() {
+		socialnetwork.listAllUsers();
 		// TODO Auto-generated method stub
 		
 	}
@@ -117,6 +118,7 @@ public class LibraryUI {
 	}
 
 	private static void addUser() {
+		socialnetwork.createUser();
 		// TODO Auto-generated method stub
 		
 	}

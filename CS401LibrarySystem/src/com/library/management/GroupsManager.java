@@ -3,12 +3,14 @@ package com.library.management;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.library.management.UserManager.User;
+
 public class GroupsManager {
     private static final List<Groups> groups = new ArrayList<>();
 
     public static class Groups {
         private String name;
-        private List<UserManager> members;
+        private List<User> members;
         private List<String> discussions;
 
         public Groups(String name) {
@@ -17,11 +19,11 @@ public class GroupsManager {
             this.discussions = new ArrayList<>();
         }
 
-        public void addMember(UserManager user) {
+        public void addMember(User user) {
             members.add(user);
         }
 
-        public void removeMember(UserManager user) {
+        public void removeMember(User user) {
             members.remove(user);
         }
 
@@ -41,7 +43,7 @@ public class GroupsManager {
             return discussions;
         }
 
-        public List<UserManager> getMembers() {
+        public List<User> getMembers() {
             return members;
         }
 
@@ -83,7 +85,7 @@ public class GroupsManager {
                 return;
             }
             System.out.println("Members of Group " + groupName + ":");
-            for (UserManager member : group.getMembers()) {
+            for (User member : group.getMembers()) {
                 System.out.println(member.getUsername());
             }
         }
