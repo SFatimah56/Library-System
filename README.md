@@ -12,6 +12,8 @@ The Library System is a console-based program that replicates a standard public 
 5. To continue: select a new operation between 1 and 8
 6. To exit, select option 9
 
+## [Presentation Slides](https://docs.google.com/presentation/d/1S9zvXSMHhKuRYRQy-KLy8j3Tj9K4Dkn6bLbA1dNtCw0/edit#slide=id.p)
+
 ## Credits
 Sharan Robinson
 
