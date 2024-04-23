@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="Rerun TestprintAll()" project="CS401LibrarySystem" tests="1" started="1" failures="1" errors="0" ignored="0">
+  <testsuite name="test.LibraryTest" time="0.059" displayname="LibraryTest" uniqueid="[engine:junit-jupiter]/[class:test.LibraryTest]">
+    <testcase name="TestprintAll" classname="test.LibraryTest" time="0.059" displayname="TestprintAll()" uniqueid="[engine:junit-jupiter]/[class:test.LibraryTest]/[method:TestprintAll()]">
+      <failure>
+        <expected>Charlie Puth Autobioography by Charlie Puth
+ How to Sing by Sally Tillers
+</expected>
+        <actual>
+Title: Charlie Puth Autobioography , Author: Charlie Puth, ISBN: 1234567890, Genre: Non-Fiction, Available: Yes&#13;
+
+Title: How to Sing, Author: Sally Tillers, ISBN: 0987654321, Genre: General, Available: Yes&#13;
+</actual>
+        org.junit.ComparisonFailure: expected:&lt;[Charlie Puth Autobioography by Charlie Puth
+ How to Sing by Sally Tillers]
+&gt; but was:&lt;[
+Title: Charlie Puth Autobioography , Author: Charlie Puth, ISBN: 1234567890, Genre: Non-Fiction, Available: Yes&#13;
+
+Title: How to Sing, Author: Sally Tillers, ISBN: 0987654321, Genre: General, Available: Yes&#13;]
+&gt;&#13;
+	at org.junit.Assert.assertEquals(Assert.java:117)&#13;
+	at org.junit.Assert.assertEquals(Assert.java:146)&#13;
+	at test.LibraryTest.TestprintAll(LibraryTest.java:130)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+&#13;
+
+      </failure>
+    </testcase>
+  </testsuite>
+</testrun>
