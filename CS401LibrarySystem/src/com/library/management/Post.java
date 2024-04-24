@@ -1,6 +1,8 @@
 package com.library.management;
 import java.util.ArrayList;
 
+import com.library.management.UserManager.User;
+
 public class Post {
 	private String title; 
 	private ArrayList<Post> comments;

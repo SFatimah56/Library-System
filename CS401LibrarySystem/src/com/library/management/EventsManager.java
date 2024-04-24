@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 public class EventsManager {
     private static ArrayList<Event> events = new ArrayList<Event>();  // Static list to hold all events
 
-    void createEvent(String title, String description, Timestamp date, String type) {
+    public void createEvent(String title, String description, Timestamp date, String type) {
         Event event = new Event(title, description, date, type);
         EventsManager.events.add(event);  // Add this event to the list
     }

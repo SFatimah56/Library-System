@@ -82,7 +82,7 @@ public class Library {
 
 
     // Utility method to find a book by ISBN
-    private Book findBookByISBN(String ISBN) {
+    public Book findBookByISBN(String ISBN) {
         for (Book book : books) {
             if (book.getISBN().equals(ISBN)) {
                 return book;
@@ -92,7 +92,7 @@ public class Library {
     }
 
     // Utility method to find a patron by ID
-    Patron findPatronByID(int ID) {
+    public Patron findPatronByID(int ID) {
         for (Patron patron : patrons) {
             if (patron.getID() == ID) {
                 return patron;
@@ -146,6 +146,14 @@ public class Library {
                 System.out.println("Transaction ID: " + transactionID + ", Book: " + bookTitle + ", Patron: " + patronName + ", Checkout Date: " + checkoutDate);
             }
         }
+    }
+    
+    public List<Book> getBooks(){
+    	return this.books;
+    }
+    
+    public List<Patron> getPatrons() {
+        return this.patrons;
     }
 
 }

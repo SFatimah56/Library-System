@@ -66,26 +66,6 @@ public class UserManager {
         	favoriteBookiSBN.remove(book.getISBN());
         }
 
-        public void postMessage(String message) {
-            // Logic for posting message
-        }
-
-        public void commentOnPost(String postId, String comment) {
-            // Logic for commenting on a post
-        }
-
-        public void likePost(String postId) {
-            // Logic for liking a post
-        }
-
-        public void sharePost(String postId) {
-            // Logic for sharing a post
-        }
-
-
-        public void participateInDiscussion(String discussion) {
-            // Logic for participating in a discussion
-        }
         
         public int getID() {
         	return id;
@@ -110,45 +90,18 @@ public class UserManager {
       public ArrayList<String> getGenres() {
     	  return genres;
       }
-//
-////        public void setFavoriteBooks(List<Book> favoriteBooks) {
-////            this.favoriteBooks = favoriteBooks;
-////        }
-//
-//        public String getReadingHabits() {
-//            return readingHabits;
-//        }
-//
-//        public void setReadingHabits(String readingHabits) {
-//            this.readingHabits = readingHabits;
-//        }
-//
-
-//
-//        public void setLiteraryPreferences(String literaryPreferences) {
-//            this.literaryPreferences = literaryPreferences;
-//        }
+     
 
         public List<String> getFollowers() {
             return followerIDs;
         }
         
         
-        
-
-//
-//        public void setFollowers(List<User> followers) {
-//            this.followers = followers;
-//        }
-//
         public List<String> getFollowings() {
             return followingIDs;
         }
-//
-//        public void setFollowings(List<User> followings) {
-//            this.followings = followings;
-//        }
-
+        
+        
         public int getId() {
             return id;
         }

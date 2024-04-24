@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="BookTest" project="CS401LibrarySystem" tests="5" started="5" failures="0" errors="0" ignored="0">
-  <testsuite name="test.BookTest" time="0.023" displayname="BookTest" uniqueid="[engine:junit-jupiter]/[class:test.BookTest]">
-    <testcase name="testNonFictionBookGetDetails" classname="test.BookTest" time="0.004" displayname="testNonFictionBookGetDetails()" uniqueid="[engine:junit-jupiter]/[class:test.BookTest]/[method:testNonFictionBookGetDetails()]"/>
-    <testcase name="testMutipleAuthor" classname="test.BookTest" time="0.003" displayname="testMutipleAuthor()" uniqueid="[engine:junit-jupiter]/[class:test.BookTest]/[method:testMutipleAuthor()]"/>
-    <testcase name="TestGetDetails" classname="test.BookTest" time="0.001" displayname="TestGetDetails()" uniqueid="[engine:junit-jupiter]/[class:test.BookTest]/[method:TestGetDetails()]"/>
-    <testcase name="TestGetAuthor" classname="test.BookTest" time="0.009" displayname="TestGetAuthor()" uniqueid="[engine:junit-jupiter]/[class:test.BookTest]/[method:TestGetAuthor()]"/>
-    <testcase name="testFictionBookGetDetails" classname="test.BookTest" time="0.003" displayname="testFictionBookGetDetails()" uniqueid="[engine:junit-jupiter]/[class:test.BookTest]/[method:testFictionBookGetDetails()]"/>
-  </testsuite>
-</testrun>

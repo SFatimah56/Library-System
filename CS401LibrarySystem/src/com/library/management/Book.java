@@ -10,7 +10,7 @@ public class Book {
 	private String author;
 	private List<Author> authors;
 
-	public Book() {}
+	
 
 	public Book(String iSBN, String author, boolean available, String title, String genre) {
 		ISBN = iSBN;
@@ -20,7 +20,13 @@ public class Book {
 		this.genre = genre;
 	}
 
-    public String getDetails() {
+
+	public Book() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+	public String getDetails() {
         return "\nTitle: " + getTitle() +
                ", Author: " + getAuthor() +
                ", ISBN: " + getISBN() +

@@ -61,6 +61,7 @@ public class Patron {
     public void setBorrowingHistory(List<Transaction> bH) {
         this.borrowingHistory = bH;
     }
+    
 
     //methods
     // Update the name and contact information by overriding old details
@@ -113,6 +114,7 @@ public class Patron {
         public boolean isFaculty() {
     		return isFaculty;
     	}
+        
     }
     
  // FacultyPatron inherits from Patron
@@ -140,5 +142,7 @@ public class Patron {
     		return isFaculty;
     	}
     }
+    
+  
 
 }
