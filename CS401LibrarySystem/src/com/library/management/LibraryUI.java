@@ -3,6 +3,7 @@ import java.util.Scanner;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.InputMismatchException;
 
 
 public class LibraryUI {
@@ -33,9 +34,14 @@ public class LibraryUI {
     
     private static void socialNetwork() {
         	boolean running = true;
+        	int choice;
             while (running) {
             	socialNetworkMenu();
-                int choice = scanner.nextInt();
+            	try {
+                choice = scanner.nextInt();
+            	}catch(InputMismatchException ex){
+            	choice = 10; 
+            	}
                 scanner.nextLine(); // Consume the newline character
 
                 switch (choice) {
@@ -46,27 +52,18 @@ public class LibraryUI {
                     addGroup();
                     break;
                 case 3:
-                    addDisscussion();
-                    break;
-                case 4:
                     addEvents();
                     break;
-                case 5:
+                case 4:
                 	printAllUsers();
                     break;
-                case 6:
+                case 5:
                 	printAllGroups();
                     break;
-                case 7:
-                	printAllDiscussions();
-                    break;
-                case 8:    
+                case 6:    
                 	printAllEvents();
                     break;
-                case 9:    
-                	loginAsUser();
-                    break;
-                case 10:
+                case 7:
                     running = false;
                     System.out.println("Exiting the system. Goodbye!");
                     break;
@@ -78,19 +75,11 @@ public class LibraryUI {
         
     
     
-    private static void loginAsUser() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	private static void printAllEvents() {
 		socialnetwork.listAllEvents();	
 	}
 
-	private static void printAllDiscussions() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	private static void printAllGroups() {
 		// TODO Auto-generated method stub
@@ -173,15 +162,12 @@ public class LibraryUI {
         System.out.println("\nSocial Network System");
         System.out.println("1. Add User");
         System.out.println("2. Add Group");
-        System.out.println("3. Add Discussion");
-        System.out.println("4. Add Events");
-        System.out.println("5. Print All User");
-        System.out.println("6. Print All Groups");
-        System.out.println("7. Print All Discussions");
-        System.out.println("8. Print All Events");
-        System.out.println("9. Login As User");
-        System.out.println("10. Quit");
-        System.out.print("Enter your choice (1-10): ");
+        System.out.println("3. Add Events");
+        System.out.println("4. Print All User");
+        System.out.println("5. Print All Groups");
+        System.out.println("6. Print All Events");
+        System.out.println("7. Quit");
+        System.out.print("Enter your choice (1-7): ");
     }
    
 

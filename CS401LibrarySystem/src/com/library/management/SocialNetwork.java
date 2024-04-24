@@ -25,6 +25,7 @@ public class SocialNetwork {
 	
 	
 	public SocialNetwork(){
+		setupdatabase();
 		this.eventmanager = new EventsManager();
 		this.usermanager = new UserManager();
 		this.groupmanager = new GroupManager();
@@ -32,6 +33,54 @@ public class SocialNetwork {
 		getUsers();
 		getGroups();
 	    scanner = new Scanner(System.in);
+
+	}
+	
+	private void setupdatabase() {
+		  try
+	        (
+	          // create a database connection
+	          Connection connection = DriverManager.getConnection("jdbc:sqlite:database.db");
+	          Statement statement = connection.createStatement();
+	        )
+	        {
+	        	String setUp = "CREATE TABLE IF NOT EXISTS Events (\n"
+	                    + "  id integer,\n"
+	                    + "  title text NOT NULL,\n"
+	                    + "  description text NOT NULL,\n"
+	                    + "  eventdate date NOT NULL,\n"
+	                    + "  eventtype text NOT NULL\n"
+	                    + ");";
+	            
+	            statement.execute(setUp);
+
+	        	String setUp2 = "CREATE TABLE IF NOT EXISTS Users (\n"
+	        			+ " id integer,\n"
+	        			+ " username text NOT NULL,\n"
+	        			+ " favoriteBookISBN text,\n"
+	        			+ " readingHabits text,\n"
+	        			+ " genres text,\n"
+	        			+ " followerIDs text,\n"
+	        			+ " followingIDs text\n"
+	        			+ ");";
+	            
+	            statement.execute(setUp2);
+	            
+	            
+	        	String setUp3 = "CREATE TABLE IF NOT EXISTS Groups (\n"
+	                    + "  name text,\n"
+	                    + "  discussionIDs text,\n"
+	                    + "  members text\n"
+	                    + ");";
+	            
+	            statement.execute(setUp3);
+	          
+	        }
+	        catch(SQLException e)
+	        {
+
+	          e.printStackTrace(System.err);
+	        }
 
 	}
 	
@@ -81,7 +130,6 @@ public class SocialNetwork {
 	}
 
 	
-	
 	public void updateEvents() {
 		ArrayList<Event> events = eventmanager.getAllEvents();
 
@@ -93,7 +141,7 @@ public class SocialNetwork {
         )
         {
         	String setUp = "CREATE TABLE IF NOT EXISTS Events (\n"
-                    + "  id integer PRIMARY KEY,\n"
+                    + "  id integer,\n"
                     + "  title text NOT NULL,\n"
                     + "  description text NOT NULL,\n"
                     + "  eventdate date NOT NULL,\n"
@@ -139,7 +187,7 @@ public class SocialNetwork {
         )
         {
         	String setUp = "CREATE TABLE IF NOT EXISTS Users (\n"
-        			+ " id integer PRIMARY KEY,\n"
+        			+ " id integer,\n"
         			+ " username text NOT NULL,\n"
         			+ " favoriteBookISBN text,\n"
         			+ " readingHabits text,\n"
@@ -238,7 +286,7 @@ public class SocialNetwork {
         )
         {
         	String setUp = "CREATE TABLE IF NOT EXISTS Groups (\n"
-                    + "  name text PRIMARY KEY,\n"
+                    + "  name text,\n"
                     + "  discussionIDs text,\n"
                     + "  members text\n"
                     + ");";
@@ -291,11 +339,11 @@ public class SocialNetwork {
         {
           // read the result set
         
-        int id = rs.getInt("id");
+        String title = rs.getString("title");
         boolean dup = false;
         
         for(Event i : eventmanager.getAllEvents()) {
-        	if(i.getEventId() == id) {
+        	if(i.getTitle() == title) {
         		dup = true;
         	}
         }

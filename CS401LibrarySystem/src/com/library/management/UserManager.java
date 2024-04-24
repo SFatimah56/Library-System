@@ -26,6 +26,18 @@ public class UserManager {
         return new ArrayList<User>(users);  // Return a new ArrayList containing all events
     }
     
+    
+    public int getHighestID() {
+    	int maxID = 0;
+    	for (User user : users) {
+    		  if(user.id > maxID) {
+    			  maxID = user.id + 1;
+    		  }
+    		}
+    	
+    	return maxID;
+    }
+    
     public static class User {
     	private static int nextId = 1;
         private String username;
