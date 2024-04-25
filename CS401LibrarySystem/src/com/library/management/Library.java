@@ -7,6 +7,19 @@ public class Library {
     private List<Book> books = new ArrayList<>();
     private List<Patron> patrons = new ArrayList<>();
     private List<Transaction> transactions = new ArrayList<>();
+    private static Library instance; // Single private instance
+
+    // Private constructor to prevent external instantiation
+    private Library() {
+    }
+
+    // Public method to provide access to the instance
+    public static Library getInstance() {
+        if (instance == null) {
+            instance = new Library();
+        }
+        return instance;
+    }
 
     // Method to add a book
     public void addBook(Book book) {

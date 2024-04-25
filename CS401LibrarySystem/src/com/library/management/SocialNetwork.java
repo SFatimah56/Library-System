@@ -18,23 +18,31 @@ import com.library.management.EventsManager.Event;
 import com.library.management.GroupManager.Group;
 import com.library.management.UserManager.User;
 public class SocialNetwork {
-	EventsManager eventmanager;
+	private static SocialNetwork instance = null;  // Single private instance
+  EventsManager eventmanager;
 	UserManager usermanager;
 	GroupManager groupmanager;
 	Scanner scanner;
 	
-	
-	public SocialNetwork(){
-		setupdatabase();
-		this.eventmanager = new EventsManager();
-		this.usermanager = new UserManager();
-		this.groupmanager = new GroupManager();
-		getEvents();
-		getUsers();
-		getGroups();
-	    scanner = new Scanner(System.in);
+  private SocialNetwork() {
+    setupdatabase(); 
+    this.eventmanager = new EventsManager();
+    this.usermanager = new UserManager();
+    this.groupmanager = new GroupManager();
+    getEvents();  
+    getUsers();   
+    getGroups(); 
+    this.scanner = new Scanner(System.in); 
+}
 
-	}
+// Public method to access the instance
+public static SocialNetwork getInstance() {
+    if (instance == null) {
+        instance = new SocialNetwork();
+    }
+    return instance;
+}
+
 	
 	private void setupdatabase() {
 		  try

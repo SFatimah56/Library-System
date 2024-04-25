@@ -7,9 +7,9 @@ import java.util.InputMismatchException;
 
 
 public class LibraryUI {
-    private static Library library = new Library();
+    private static Library library = Library.getInstance();  //
     private static Scanner scanner = new Scanner(System.in);
-    private static SocialNetwork socialnetwork = new SocialNetwork();
+    private static SocialNetwork socialnetwork = SocialNetwork.getInstance();
 
     public static void main(String[] args) {
         while(true) {
