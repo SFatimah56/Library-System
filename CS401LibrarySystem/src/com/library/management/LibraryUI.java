@@ -26,10 +26,8 @@ public class LibraryUI {
             else if (choice == 3) {
             	break;
             }
-        }
-        
+        }      
        System.out.print("Program Ending...");
-        
     }
     
     private static void socialNetwork() {
@@ -64,6 +62,9 @@ public class LibraryUI {
                 	printAllEvents();
                     break;
                 case 7:
+                	socialInteractions();
+                	break;
+                case 8:
                     running = false;
                     System.out.println("Exiting the system. Goodbye!");
                     break;
@@ -73,44 +74,102 @@ public class LibraryUI {
             }
         }
         
-    
-    
+    private static void socialInteractions() {
+        boolean running = true;
+        while (running) {
+            socialInteractionsMenu();
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline character after numeric input
+
+            switch (choice) {
+            case 1:
+            	System.out.print("Enter user ID: ");
+                int currentUserId = scanner.nextInt();
+                System.out.print("Enter receiver ID: ");
+                int receiverId = scanner.nextInt();
+                scanner.nextLine(); // Clean up the newline
+                System.out.print("Enter message: ");
+                String message = scanner.nextLine();
+                socialnetwork.sendMessage(currentUserId, receiverId, message); // Assumes `currentUserId` is defined
+                break;
+            case 2:
+            	System.out.print("Enter user ID: ");
+                currentUserId = scanner.nextInt();
+                socialnetwork.viewMessages(currentUserId);
+                break;
+            case 3:
+                System.out.print("Enter Group Name: ");
+                String groupName = scanner.nextLine();
+                System.out.print("Enter Discussion Title: ");
+                String title = scanner.nextLine();
+                System.out.print("Enter Discussion Content: ");
+                String content = scanner.nextLine();
+                socialnetwork.addDiscussionToGroup(groupName, title, content);
+            	break;
+            case 4: 
+            	System.out.print("Enter Group Name: ");
+                groupName = scanner.nextLine();
+                socialnetwork.listDiscussionsInGroup(groupName);
+            	break;
+            case 5:
+                System.out.print("Enter Event ID: ");
+                int eventId = scanner.nextInt();
+                System.out.print("Enter user ID: ");
+                currentUserId = scanner.nextInt();
+                scanner.nextLine(); // Clear buffer
+                System.out.print("Enter your comment: ");
+                String comment = scanner.nextLine();
+                socialnetwork.addEventComment(eventId, currentUserId, comment);
+            	break;
+            case 6: 
+                System.out.print("Enter Event ID: ");
+                eventId = scanner.nextInt();
+                System.out.print("Enter user ID: ");
+                currentUserId = scanner.nextInt();
+                System.out.print("Enter RSVP status (Attending/Interested/Declined): ");
+                scanner.nextLine(); // Clear buffer
+                String status = scanner.nextLine();
+                socialnetwork.addRSVP(eventId, currentUserId, status);
+            	break;
+            case 7:
+                System.out.print("Enter your user ID: ");
+                int followerId = scanner.nextInt();
+                System.out.print("Enter the user ID of the user you want to follow: ");
+                int followedId = scanner.nextInt();
+                socialnetwork.followUser(followerId, followedId);
+                System.out.println("You are now following user ID: " + followedId);
+            case 8:
+                running = false;
+                break;
+            default:
+                System.out.println("Invalid choice. Please try again.");
+                break;
+            }
+        }
+    }
 
 	private static void printAllEvents() {
 		socialnetwork.listAllEvents();	
 	}
 
-
 	private static void printAllGroups() {
-		// TODO Auto-generated method stub
 		socialnetwork.listAllGroups();
 	}
 
 	private static void printAllUsers() {
 		socialnetwork.listAllUsers();
-		// TODO Auto-generated method stub
-		
 	}
 
 	private static void addEvents() {
 		socialnetwork.createEvent();
 	}
 
-	private static void addDisscussion() {
-		// TODO Auto-generated method stub
-		
-	}
-
 	private static void addGroup() {
-		// TODO Auto-generated method stub
-		socialnetwork.createGroup();
-		
+		socialnetwork.createGroup();		
 	}
 
 	private static void addUser() {
 		socialnetwork.createUser();
-		// TODO Auto-generated method stub
-		
 	}
 
 	private static void libraryManagement() {
@@ -154,10 +213,7 @@ public class LibraryUI {
             }
         }
     }
-    
-    
-    
-    
+      
     private static void socialNetworkMenu(){
         System.out.println("\nSocial Network System");
         System.out.println("1. Add User");
@@ -166,10 +222,22 @@ public class LibraryUI {
         System.out.println("4. Print All User");
         System.out.println("5. Print All Groups");
         System.out.println("6. Print All Events");
-        System.out.println("7. Quit");
+        System.out.println("7. Social Interaction");
+        System.out.println("8. Quit");
         System.out.print("Enter your choice (1-7): ");
     }
-   
+    private static void socialInteractionsMenu() {
+        System.out.println("\nSocial Interactions Menu");
+        System.out.println("1. Send Message");
+        System.out.println("2. View Messages");
+        System.out.println("3. Add Discussion to Group");
+        System.out.println("4. View Discussions in Group");
+        System.out.println("5. Comment on Event");
+        System.out.println("6. RSVP to Event");
+        System.out.println("7. Follow a User");
+        System.out.println("8. Return to Main Menu");
+        System.out.print("Enter your choice (1-8): ");
+    }
 
     private static void displayMenu() {
         System.out.println("\nLibrary Management System");
@@ -292,6 +360,4 @@ public class LibraryUI {
             System.out.println("Patron not found.");
         }
     }
-    
-
 }

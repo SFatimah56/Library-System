@@ -1,3 +1,4 @@
+
 package com.library.management;
 
 import java.text.SimpleDateFormat;
@@ -144,21 +145,17 @@ public class GroupManager {
         public String toString() {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             return "Group Name: " + name;
-        }
-        
+        }    
     }
-
-
+    
 	public void listAllGroups() {
 		// TODO Auto-generated method stub
         if (groups.isEmpty()) {
-            System.out.println("No events scheduled.");
+            System.out.println("No Groups.");
             return;
         }
         for (Group group : groups) {
             System.out.println(group.toString());
         }
 	}
-
-
 }

@@ -1,3 +1,4 @@
+
 package com.library.management;
 
 import java.sql.Timestamp;
@@ -25,16 +26,14 @@ public class UserManager {
     public ArrayList<User> getAllUsers() {
         return new ArrayList<User>(users);  // Return a new ArrayList containing all events
     }
-    
-    
+        
     public int getHighestID() {
     	int maxID = 0;
     	for (User user : users) {
     		  if(user.id > maxID) {
     			  maxID = user.id + 1;
     		  }
-    		}
-    	
+    		}	
     	return maxID;
     }
     
@@ -66,9 +65,7 @@ public class UserManager {
             this.genres = genres;
             this.followerIDs = followerIDs;
             this.followingIDs = followingIDs;
-            
         }
-        
         
         public void addFavoriteBook(Book book) {
         	favoriteBookiSBN.add(book.getISBN());
@@ -78,7 +75,6 @@ public class UserManager {
         	favoriteBookiSBN.remove(book.getISBN());
         }
 
-        
         public int getID() {
         	return id;
         }
@@ -103,16 +99,13 @@ public class UserManager {
     	  return genres;
       }
      
-
         public List<String> getFollowers() {
             return followerIDs;
         }
         
-        
         public List<String> getFollowings() {
             return followingIDs;
         }
-        
         
         public int getId() {
             return id;
@@ -121,15 +114,12 @@ public class UserManager {
         public void setId(int id) {
             this.id = id;
         }
-        
-        
+                
         @Override
         public String toString() {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             return "Username: " + username + ", ID: " + id;
-        }
-        
-    	
+        }    	
     }
 
 	public void listAllUsers() {
@@ -140,9 +130,6 @@ public class UserManager {
         }
         for (User user : users) {
             System.out.println(user.toString());
-        }
-		
-	}
-
-   
+        }	
+	}  
 }
