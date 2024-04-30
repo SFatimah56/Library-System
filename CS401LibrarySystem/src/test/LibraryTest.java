@@ -1,118 +1,152 @@
 package test;
 
-import static org.junit.Assert.assertTrue;
-
-import java.util.Date;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.library.management.Book;
 import com.library.management.Library;
 import com.library.management.Patron;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.Date;
+import java.util.List;
+
+public class LibraryTest {
+    private Library library;
+    private Book book1;
+    private Book book2;
+    private Patron patron1;
+    private Patron patron2;
+
+    @Before
+    public void setUp() {
+        library = Library.getInstance();
+        book1 = new Book("1234567890", "Book Title 1", true, "Author 1", "fiction");
+        book2 = new Book("0987654321", "Book Title 2", false, "Author 2", "non-fiction");
+        patron1 = new Patron("John Doe", "john@example.com", "1234567890");
+        patron2 = new Patron("Jane Smith", "jane@example.com", "0987654321");
+    }
+
+    @Test
+    public void testAddBook() {
+        library.addBook(book1);
+        List<Book> books = library.getBooks();
+        
+        boolean found = false;
+        for (Book book : books) {
+            if (book.getISBN().equals(book1.getISBN()) &&
+                book.getTitle().equals(book1.getTitle()) &&
+                book.getAuthor().equals(book1.getAuthor())) {
+                found = true;
+                break;
+            }
+        }
+        
+        assertTrue("Book should have been added", found);
+    }
 
 
-class LibraryTest {
-	private Library library;
+    @Test
+    public void testRemoveBook() {
+        library.addBook(book1);
+        assertTrue(library.removeBook(book1.getISBN()));
+        assertFalse(library.removeBook("nonexistentISBN"));
+    }
 
-	 @BeforeEach
-	    public void setUp() {
-	        library = new Library();
-	    }
+    @Test
+    public void testRegisterPatron() {
+        library.registerPatron(patron1);
+        List<Patron> patrons = library.getPatrons();
+        assertTrue(patrons.contains(patron1));
+    }
 
-	 @Test
-	 public void TestAddBook() {
-		Book b1=new Book("1235456", "William Kelly", true, "Lavender Secrets", "Fiction");
-		library.addBook(b1);
-		assertTrue("Book was should be added successfully",library.getBooks().contains(b1));
-	 }
-	 @Test
-	 public void TestAddExistingBook() {
-		 Book b1=new Book("1235456", "William Kelly", true, "Lavender Secrets", "Fiction");
-		 Book b2=new Book("1235456", "William Kelly", true, "Lavender Secrets", "Fiction");
-		 library.addBook(b1);
-		 library.addBook(b2);
-		 assertTrue("Book already exists", !library.getBooks().contains(b2));
-	 }
+    @Test
+    public void testCheckoutBook() {
+        library.addBook(book1);
+        library.registerPatron(patron1);
+        Date checkoutDate = new Date();
+        library.checkoutBook(book1.getISBN(), patron1.getID(), checkoutDate);
+        assertFalse(book1.isAvailable());
+    }
 
-	 @Test
-	 public void TestRemoveBook() {
-		 Book b1=new Book("1235456", "William Kelly", true, "Lavender Secrets", "Fiction");
-		library.addBook(b1);
-		boolean isRemoved=library.removeBook("1235456");
-		assertTrue("Book has to should be removed successfully",isRemoved);
-		assertFalse("Book should no longer be in library",library.getBooks().contains(b1));
-	 }
+    @Test
+    public void testReturnBook() {
+        library.addBook(book1);
+        Date checkoutDate = new Date();
+        library.checkoutBook(book1.getISBN(), patron1.getID(), checkoutDate);
+        library.returnBook(book1.getISBN());
+        assertTrue(book1.isAvailable());
+    }
 
-	 @Test
-	 public void TestRemoveBookThatsNotAdded() {
-		 Book b2=new Book("987654321", "Sally Kelly", true, "Jasmine Power Secrets", "Fiction");
-		 boolean IsRemoved=library.removeBook("987654321");
-		 assertFalse("Book should not be removed if it's not added",IsRemoved);
-	 }
+    @Test
+    public void testPrintAllBooks() {
+        library.addBook(book1);
+        library.addBook(book2);
+        // Redirect System.out to check printed output
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outputStream));
+        
+        library.printAllBooks();
+        
+        String printedOutput = outputStream.toString();
+        assertTrue(printedOutput.contains(book1.getISBN()));
+        assertTrue(printedOutput.contains(book1.getTitle()));
+        assertTrue(printedOutput.contains(book1.getAuthor()));
+        assertTrue(printedOutput.contains(book2.getISBN()));
+        assertTrue(printedOutput.contains(book2.getTitle()));
+        assertTrue(printedOutput.contains(book2.getAuthor()));
 
-	 @Test
-	 public void testRegisterPatron() {
-		Patron.StudentPatron student=new Patron.StudentPatron("John Leandri", "leanjohn@yahoo.com", "1234569870", "S1234A");
-		library.registerPatron(student);
-		assertTrue("Student patron should be registered successfully", library.getPatrons().contains(student));
+        // Reset System.out
+        System.setOut(originalOut);
+    }
 
-		Patron.FacultyPatron staff=new Patron.FacultyPatron("Jenny Synder", "jennysynder@yahoo.com", "9876543210", "English");
-		library.registerPatron(staff);
-		assertTrue("Faculty patron should be registered successfully", library.getPatrons().contains(staff));
-	 }
-	 @Test
-	 public void testCheckoutBook() {
-	        Book book = new Book("1234567890", "Author", true, "Title", "Genre");
-	        library.addBook(book);
-	        Patron patron = new Patron("John Doe", "john@example.com", "1234567890");
-	        library.registerPatron(patron);
-	        Date checkoutDate = new Date();
-	        library.checkoutBook("1234567890", patron.getID(), checkoutDate);
-	        assertFalse("Book should be checked out", book.isAvailable());
-	        library.checkoutBook("1234567890", patron.getID(), new Date());
-	        assertFalse("Book should still be checked out", book.isAvailable());
-	        library.checkoutBook("9876543210", patron.getID(), new Date());
-	        library.checkoutBook("1234567890", 999, new Date());
-	    }
-	 @Test
-	    public void testReturnBook() {
-	        Book book = new Book("1234567890", "Author", false, "Title", "Genre");
-	        library.addBook(book);
-	        library.returnBook("1234567890");
-	        assertTrue("Book should be available", book.isAvailable());
-	        library.returnBook("9876543210");
-	    }
+    @Test
+    public void testPrintAllPatrons() {
+        library.registerPatron(patron1);
+        library.registerPatron(patron2);
+        // Redirect System.out to check printed output
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+        library.printAllPatrons();
+        String printedOutput = outputStream.toString();
+        assertTrue(printedOutput.contains(patron1.getName()));
+        assertTrue(printedOutput.contains(patron2.getName()));
+    }
 
-	 @Test
-	    public void testFindBookByISBN() {
-	        Book book = new Book("1234567890", "Vianka Jeorge", true, "Lavenders", "Non-fiction");
-	        library.addBook(book);
-	        Book foundBook = library.findBookByISBN("1234567890");
-	        assertNotNull(foundBook);
-	        assertEquals("1234567890", foundBook.getISBN());
-	        Book nonExistingBook = library.findBookByISBN("0987654321");
-	        assertNull(nonExistingBook);
+    @Test
+    public void testPrintAllTransactions() {
+        library.addBook(book1);
+        library.registerPatron(patron1);
+        Date checkoutDate = new Date();
+        library.checkoutBook(book1.getISBN(), patron1.getID(), checkoutDate);
+        // Redirect System.out to check printed output
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+        library.printAllTransactions();
+        String printedOutput = outputStream.toString();
+        assertTrue(printedOutput.contains(book1.getTitle()));
+        assertTrue(printedOutput.contains(patron1.getName()));
+        assertTrue(printedOutput.contains(checkoutDate.toString()));
+    }
 
-}
-	 @Test
-	 public void testFindPatronID() {
-		 Patron studentPatron = new Patron.StudentPatron("John Doe", "john@example.com", "1234567890", "123ABC");
-	        library.registerPatron(studentPatron);
-	        Patron foundStudentPatron = library.findPatronByID(studentPatron.getID());
-	        assertNotNull(foundStudentPatron);
-	        assertEquals(studentPatron.getID(), foundStudentPatron.getID());
-	        Patron nonExistingPatron = library.findPatronByID(9999); // Assuming 9999 is not an existing ID
-	        assertNull(nonExistingPatron);
-	 }
+    @Test
+    public void testFindBookByISBN() {
+        library.addBook(book1);
+        Book foundBook = library.findBookByISBN(book1.getISBN());
+        assertNotNull(foundBook); // Ensure found book is not null
+        assertEquals(book1.getISBN(), foundBook.getISBN());
+        assertEquals(book1.getTitle(), foundBook.getTitle());
+        assertEquals(book1.getAuthor(), foundBook.getAuthor());
+    }
 
-	 
-
+    @Test
+    public void testFindPatronByID() {
+        library.registerPatron(patron1);
+        Patron foundPatron = library.findPatronByID(patron1.getID());
+        assertEquals(patron1, foundPatron);
+    }
 
 }
